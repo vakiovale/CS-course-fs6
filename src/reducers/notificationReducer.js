@@ -1,4 +1,6 @@
-const reducer = (store = {}, action) => {
+const initialStore = 'render here notification!'
+
+const reducer = (store = initialStore, action) => {
   return store
 }
 
