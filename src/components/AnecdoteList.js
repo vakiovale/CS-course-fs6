@@ -1,16 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { anecdoteVoter } from '../reducers/anecdoteReducer'
-import { notificationAdder, notificationResetter } from '../reducers/notificationReducer'
+import { notify } from '../reducers/notificationReducer'
 
 class AnecdoteList extends React.Component {
   render() {
     const handleVote = async (anecdote) => {
       this.props.anecdoteVoter(anecdote)
-      this.props.notificationAdder('Voted "' + anecdote.content + '"')
-      setTimeout(() => {
-        this.props.notificationResetter()
-      }, 5000)
+      this.props.notify('Voted "' + anecdote.content + '"', 5)
     }
     return (
       <div>
@@ -48,7 +45,7 @@ const mapStateToProps = (state) => {
 
 const ConnectedAnecdoteList = connect(
   mapStateToProps,
-  { anecdoteVoter, notificationAdder, notificationResetter }
+  { anecdoteVoter, notify }
 )(AnecdoteList)
 
 export default ConnectedAnecdoteList
