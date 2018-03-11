@@ -5,7 +5,6 @@ import { notificationAdder, notificationResetter } from '../reducers/notificatio
 
 class AnecdoteList extends React.Component {
   render() {
-    const anecdotes = this.props.anecdotes
     const handleVote = (anecdote) => {
       this.props.anecdoteVoter(anecdote.id)
       this.props.notificationAdder('Voted "' + anecdote.content + '"')
@@ -38,7 +37,7 @@ class AnecdoteList extends React.Component {
 
 const anecdotesToShow = (anecdotes, filter) => {
   return anecdotes.sort((a, b) => b.votes - a.votes)
-    .filter(anecdote => anecdote.content.match(new RegExp(filter, 'i')))
+    .filter(anecdote => anecdote.content !== undefined && anecdote.content.match(new RegExp(filter, 'i')))
 }
 
 const mapStateToProps = (state) => {
