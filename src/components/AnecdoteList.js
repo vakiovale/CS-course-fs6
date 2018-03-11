@@ -16,32 +16,34 @@ class AnecdoteList extends React.Component {
     return (
       <div>
         <h2>Anecdotes</h2>
-        {anecdotes.sort((a, b) => b.votes - a.votes)
-          .filter(anecdote => anecdote.content.match(new RegExp(this.props.filter, 'i')))
-          .map(anecdote =>
-            <div key={anecdote.id}>
-              <div>
-                {anecdote.content}
-              </div>
-              <div>
-                has {anecdote.votes}
-                <button onClick={() =>
-                  handleVote(anecdote)
-                }>
-                  vote
-                </button>
-              </div>
+        {this.props.visibleAnecdotes.map(anecdote =>
+          <div key={anecdote.id}>
+            <div>
+              {anecdote.content}
             </div>
-          )}
+            <div>
+              has {anecdote.votes}
+              <button onClick={() =>
+                handleVote(anecdote)
+              }>
+                vote
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     )
   }
 }
 
+const anecdotesToShow = (anecdotes, filter) => {
+  return anecdotes.sort((a, b) => b.votes - a.votes)
+    .filter(anecdote => anecdote.content.match(new RegExp(filter, 'i')))
+}
+
 const mapStateToProps = (state) => {
   return {
-    filter: state.filter,
-    anecdotes: state.anecdotes
+    visibleAnecdotes: anecdotesToShow(state.anecdotes, state.filter)
   }
 }
 
