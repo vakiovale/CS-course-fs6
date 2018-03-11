@@ -7,8 +7,7 @@ import anecdoteService from '../services/anecdotes'
 class AnecdoteList extends React.Component {
   render() {
     const handleVote = async (anecdote) => {
-      await anecdoteService.vote(anecdote)
-      this.props.anecdoteVoter(anecdote.id)
+      this.props.anecdoteVoter(anecdote)
       this.props.notificationAdder('Voted "' + anecdote.content + '"')
       setTimeout(() => {
         this.props.notificationResetter()
