@@ -15,21 +15,23 @@ class AnecdoteList extends React.Component {
     return (
       <div>
         <h2>Anecdotes</h2>
-        {anecdotes.sort((a, b) => b.votes - a.votes).map(anecdote =>
-          <div key={anecdote.id}>
-            <div>
-              {anecdote.content}
+        {anecdotes.sort((a, b) => b.votes - a.votes)
+          .filter(anecdote => anecdote.content.match(new RegExp(this.props.store.getState().filter, 'i')))
+          .map(anecdote =>
+            <div key={anecdote.id}>
+              <div>
+                {anecdote.content}
+              </div>
+              <div>
+                has {anecdote.votes}
+                <button onClick={() =>
+                  handleVote(anecdote)
+                }>
+                  vote
+                </button>
+              </div>
             </div>
-            <div>
-              has {anecdote.votes}
-              <button onClick={() =>
-                handleVote(anecdote)
-              }>
-                vote
-              </button>
-            </div>
-          </div>
-        )}
+          )}
       </div>
     )
   }
