@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { anecdoteVoter } from '../reducers/anecdoteReducer'
 import { notificationAdder, notificationResetter } from '../reducers/notificationReducer'
-import anecdoteService from '../services/anecdotes'
 
 class AnecdoteList extends React.Component {
   render() {

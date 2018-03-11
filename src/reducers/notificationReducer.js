@@ -10,15 +10,34 @@ const reducer = (store = initialStore, action) => {
 }
 
 export const notificationAdder = (notification) => {
+  return showNotification(notification)
+}
+
+export const notificationResetter = () => {
+  return resetNotification()
+}
+
+const showNotification = (notification) => {
   return {
     type: 'ADD',
     notification: notification
   }
 }
 
-export const notificationResetter = () => {
+const resetNotification = () => {
   return {
     type: 'RESET'
+  }
+}
+
+export const notify = (notification, delayTime) => {
+  return async (dispatch) => {
+    console.log('Added notification')
+    dispatch(showNotification(notification))
+    setTimeout(() => {
+      console.log('Resetting notification')
+      dispatch(resetNotification())
+    }, delayTime * 1000)
   }
 }
 
